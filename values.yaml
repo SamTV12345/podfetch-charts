@@ -110,7 +110,7 @@ autoscaling:
 volumes:
   - name: podfetch-volume
     persistentVolumeClaim:
-      claimName: {{ include ".Values.fullnameOverride" . }}-pvc
+      claimName: podfetch-pvc
 # - name: foo
 #   secret:
 #     secretName: mysecret
