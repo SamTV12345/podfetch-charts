@@ -105,15 +105,30 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+
 # Additional volumes on the output Deployment definition.
-volumes: []
+volumes:
+  - name: podfetch-volume
+    persistentVolumeClaim:
+      claimName: {{ include "podfetch.fullname" . }}-pvc
 # - name: foo
 #   secret:
 #     secretName: mysecret
 #     optional: false
 
+# PVC Definition
+persistence:
+  enabled: true
+  existingClaim: ""
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi  # Hier können Sie die Größe des Volumes eintragen
+
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
+volumeMounts:
+  - name: podfetch-volume
+    mountPath: /app/podcasts
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
